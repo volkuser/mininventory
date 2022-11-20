@@ -1,7 +1,7 @@
 <#import "parts/common.ftl" as c>
 
 <@c.page>
-    <h5>Location control</h5>
+    <h3>Location control</h3>
     <table class="table">
         <thead>
         <tr>
@@ -18,13 +18,15 @@
                 <tr>
                     <td>${location.id}</td>
                     <td>${location.number}</td>
-                    <td>${location.additionLetter}</td>
                     <td>
-                    <#if location.isAuditory()>
-                        yes
-                    <#else>
-                        no
-                    </#if>
+                        ${location.additionLetter}
+                    </td>
+                    <td>
+                        <#if location.isAuditory()>
+                            yes
+                        <#else>
+                            no
+                        </#if>
                     </td>
                     <td>${location.operatingHours}</td>
                     <td>${location.openFrom}</td>
@@ -34,12 +36,12 @@
             </#list>
         </tbody>
     </table>
-    <h3>Add new location</h3>
+    <h5>Add new location</h5>
     <form method="post">
         <div class="mb-3">
             <label class="form-label">Number</label>
             <label>
-                <input type="number" class="form-control" name="number" minlength="1">
+                <input type="number" class="form-control" name="number" min="1" value="1">
             </label>
         </div>
         <div class="mb-3">
