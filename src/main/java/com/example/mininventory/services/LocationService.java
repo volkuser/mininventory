@@ -53,9 +53,8 @@ public class LocationService {
 
     public List<Location> getResultImpreciseSearch(String query) {
         List<Location> desiredByNumber = new ArrayList<>(), desiredByLetter = new ArrayList<>();
-        for (Location location : locationRepository.findAll()){
+        for (Location location : locationRepository.findAll())
             if (Byte.toString(location.getNumber()).contains(query)) desiredByNumber.add(location);
-        }
         try {
             // imprecise search for char is identical to exact search for char
             desiredByLetter = locationRepository.findByAdditionLetter(query.charAt(0));

@@ -6,36 +6,34 @@
         <div class="p-2">
             <table class="table">
                 <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Number</th>
-                    <th scope="col">Letter</th>
-                    <th scope="col">Is auditory</th>
-                    <th scope="col">Operating hours</th>
-                    <th scope="col">Open from</th>
-                </tr>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Number</th>
+                        <th scope="col">Letter</th>
+                        <th scope="col">Is auditory</th>
+                        <th scope="col">Operating hours</th>
+                        <th scope="col">Open from</th>
+                    </tr>
                 </thead>
                 <tbody>
-                <#list locations as location>
-                    <tr>
-                        <td>${location.id}</td>
-                        <td>${location.number}</td>
-                        <td>
-                            ${location.additionLetter}
-                        </td>
-                        <td>
-                            <#if location.isAuditory()>
-                                yes
-                            <#else>
-                                no
-                            </#if>
-                        </td>
-                        <td>${location.operatingHours}</td>
-                        <td>${location.openFrom}</td>
-                    </tr>
-                <#else>
-                    <td>no locations</td>
-                </#list>
+                    <#list locations as location>
+                        <tr>
+                            <td>${location.id}</td>
+                            <td>${location.number}</td>
+                            <td>${location.additionLetter}</td>
+                            <td>
+                                <#if location.isAuditory()>
+                                    yes
+                                <#else>
+                                    no
+                                </#if>
+                            </td>
+                            <td>${location.operatingHours}</td>
+                            <td>${location.openFrom}</td>
+                        </tr>
+                    <#else>
+                        <td>no locations</td>
+                    </#list>
                 </tbody>
             </table>
         </div>
@@ -48,10 +46,14 @@
                             <input type="text" class="form-control" name="query"/>
                         </label>
                     </div>
-                    <button type="submit" class="btn btn-primary" formaction="/location/exact"
-                            formmethod="get">Exact search</button>
-                    <button type="submit" class="btn btn-primary" formaction="/location/imprecise"
-                            formmethod="get">Imprecise search</button>
+                    <div class="p-1">
+                        <button type="submit" class="btn btn-primary" formaction="/location/exact"
+                                formmethod="get">Exact search</button>
+                    </div>
+                    <div class="p-1">
+                        <button type="submit" class="btn btn-primary" formaction="/location/imprecise"
+                                formmethod="get">Imprecise search</button>
+                    </div>
                 </form>
             </div>
             <div class="p-2">
