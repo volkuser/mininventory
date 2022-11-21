@@ -8,6 +8,6 @@ import java.util.List;
 
 @Repository
 public interface LocationRepository extends CrudRepository<Location, Long> {
-    //List<Location> getAll();
-    //List<Location> findAllByNumberOrLetter(String NumberOrLetter);
+    List<Location> findByNumber(byte number);
+    List<Location> findByAdditionLetter(char letter);
 }
