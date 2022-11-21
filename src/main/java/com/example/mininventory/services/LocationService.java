@@ -19,6 +19,26 @@ public class LocationService {
         return locationRepository.findAll();
     }
 
+    private List<Location> fusion(List<Location> first, List<Location> second){
+        List<Location> fusion = first;
+
+        boolean match = false;
+        for (Location locationInSecond : second){
+            for (Location locationInFirst : first) {
+                if (locationInFirst.equals(locationInSecond)) {
+                    match = true;
+                    break;
+                }
+            }
+            if (!match) {
+                fusion.add(locationInSecond);
+                match = false;
+            }
+        }
+
+        return fusion;
+    }
+
     public List<Location> getResultExactSearch(String query) {
         List<Location> desiredByNumber = new ArrayList<>(), desiredByLetter = new ArrayList<>();
         try {
@@ -28,23 +48,20 @@ public class LocationService {
             desiredByLetter = locationRepository.findByAdditionLetter(query.charAt(0));
         } catch (Exception ignored) { }
 
-        List<Location> desired = desiredByNumber;
+        return fusion(desiredByNumber, desiredByLetter);
+    }
 
-        boolean match = false;
-        for (Location locationWithLetter : desiredByLetter){
-            for (Location locationWithNumber : desiredByNumber) {
-                if (locationWithNumber.equals(locationWithLetter)) {
-                    match = true;
-                    break;
-                }
-            }
-            if (!match) {
-                desired.add(locationWithLetter);
-                match = false;
-            }
+    public List<Location> getResultImpreciseSearch(String query) {
+        List<Location> desiredByNumber = new ArrayList<>(), desiredByLetter = new ArrayList<>();
+        for (Location location : locationRepository.findAll()){
+            if (Byte.toString(location.getNumber()).contains(query)) desiredByNumber.add(location);
         }
+        try {
+            // imprecise search for char is identical to exact search for char
+            desiredByLetter = locationRepository.findByAdditionLetter(query.charAt(0));
+        } catch (Exception ignored) { }
 
-        return desired;
+        return fusion(desiredByNumber, desiredByLetter);
     }
 
     public void add(Location location){

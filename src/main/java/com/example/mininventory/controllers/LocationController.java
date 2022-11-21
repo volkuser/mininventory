@@ -29,9 +29,20 @@ public class LocationController {
     }
 
     @GetMapping("/location/exact")
-    public String exactSearch(@RequestParam(value = "query" ) String query,  Model model){
+    public String exactSearch(@RequestParam(value = "query" ) String query, Model model){
         if (!query.isEmpty()){
             List<Location> locations = locationService.getResultExactSearch(query);
+
+            model.addAttribute("locations", locations);
+
+            return "location_control";
+        } else return "redirect:/location";
+    }
+
+    @GetMapping("/location/imprecise")
+    public String impreciseSearch(@RequestParam(value = "query" ) String query, Model model){
+        if (!query.isEmpty()){
+            List<Location> locations = locationService.getResultImpreciseSearch(query);
 
             model.addAttribute("locations", locations);
 

@@ -50,7 +50,8 @@
                     </div>
                     <button type="submit" class="btn btn-primary" formaction="/location/exact"
                             formmethod="get">Exact search</button>
-                    <button type="submit" class="btn btn-primary">Imprecise search</button>
+                    <button type="submit" class="btn btn-primary" formaction="/location/imprecise"
+                            formmethod="get">Imprecise search</button>
                 </form>
             </div>
             <div class="p-2">
