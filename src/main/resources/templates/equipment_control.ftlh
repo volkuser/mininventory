@@ -68,8 +68,8 @@
                     <div class="mb-3">
                         <label class="form-label">Year of entry</label>
                         <label>
-                            <input type="number" class="form-control" name="yearOfEntry"
-                                   value="1900" min="1900" max="2999" maxlength="4" minlength="4">
+                            <input type="number" class="form-control" name="yearOfEntry" value="1900"
+                                   min="1900" max="2999">
                         </label>
                     </div>
                     <div class="mb-3">

@@ -5,7 +5,7 @@ import java.time.Year;
 
 @Entity
 public class Equipment {
-    @javax.persistence.Id
+    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long Id;
 
