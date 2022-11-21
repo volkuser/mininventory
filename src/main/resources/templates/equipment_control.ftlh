@@ -51,7 +51,7 @@
                 </form>
             </div>
             <div class="p-2">
-                <h5>Add new location</h5>
+                <h5>Add new equipment</h5>
                 <form method="post">
                     <div class="mb-3">
                         <label class="form-label">Inventory number</label>
@@ -62,28 +62,28 @@
                     <div class="mb-3">
                         <label class="form-label">Weight</label>
                         <label>
-                            <input type="number" class="form-control" value="0.1" min="0.1" name="weight">
+                            <input type="number" class="form-control" value="0.01" min="0.01" step="0.01" name="weight">
                         </label>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Year of entry</label>
                         <label>
                             <input type="number" class="form-control" name="yearOfEntry"
-                                   value="1900" min="1900" max="2999">
+                                   value="1900" min="1900" max="2999" maxlength="4" minlength="4">
                         </label>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Count</label>
                         <label>
-                            <input type="number" class="form-control" value="1" min="1" name="operatingHours">
+                            <input type="number" class="form-control" value="1" min="1" name="count">
                         </label>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Location</label>
                         <label>
-                            <select type="date" class="form-control" name="openFrom">
+                            <select name="location" class="form-control">
                                 <#list locations as location>
-                                    <option>${location.number}</option>
+                                    <option value="${location.id}">${location.number}</option>
                                 </#list>
                             </select>
                         </label>

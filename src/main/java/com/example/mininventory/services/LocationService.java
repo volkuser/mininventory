@@ -9,6 +9,7 @@ import java.sql.Date;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class LocationService {
@@ -77,5 +78,9 @@ public class LocationService {
 
         Location location = new Location(number, additionLetter, isAuditory, operatingHours, openFrom);
         locationRepository.save(location);
+    }
+
+    public Location getById(Long id){
+        return locationRepository.findById(id).orElseThrow();
     }
 }
