@@ -5,10 +5,7 @@ import com.example.mininventory.services.LocationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class LocationItemController {
@@ -34,6 +31,17 @@ public class LocationItemController {
         getAndLoadLocation(model, id);
 
         return "location_item_control";
+    }
+
+    @PostMapping("/location/more/{id}/delete")
+    public String delete(@PathVariable("id") String id, Model model){
+        try{
+            locationService.deleteById(Long.parseLong(id));
+            return "redirect:/location";
+        } catch (Exception exception) {
+            getAndLoadLocation(model, id);
+            return "redirect:/location/more/{id}";
+        }
     }
 
     private void getAndLoadLocation(Model model, String id){

@@ -43,6 +43,7 @@
         </div>
         <a type="button" class="btn btn-primary" href="/location">Back</a>
         <button type="submit" formmethod="post" class="btn btn-primary">Update</button>
-        <button type="submit" class="btn btn-primary">Delete</button>
+        <button type="submit" class="btn btn-primary"
+                formmethod="post" formaction="/location/more/${selectedLocation.id}/delete">Delete</button>
     </form>
 </@c.page>

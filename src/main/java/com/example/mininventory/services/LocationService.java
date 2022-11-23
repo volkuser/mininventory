@@ -97,4 +97,5 @@ public class LocationService {
     public Location getById(Long id){
         return locationRepository.findById(id).orElseThrow();
     }
+    public void deleteById(Long id) { locationRepository.deleteById(id); }
 }
