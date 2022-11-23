@@ -24,16 +24,7 @@ public class EquipmentController {
 
     @GetMapping("/equipment")
     public String show(Model model) {
-        List<Equipment> equipments = StreamSupport.stream(equipmentService.getAll().spliterator(),
-                false).toList();
-
-        // select of locations
-        List<Location> locations = StreamSupport.stream(locationService.getAll().spliterator(),
-                false).toList();
-        model.addAttribute("locations", locations);
-
-        model.addAttribute("equipments", equipments);
-
+        loadListWithSubList(model);
         return "equipment_control";
     }
 
@@ -42,10 +33,7 @@ public class EquipmentController {
         if (!query.isEmpty()){
             List<Equipment> equipments = equipmentService.getResultExactSearch(query);
 
-            // select of locations
-            List<Location> locations = StreamSupport.stream(locationService.getAll().spliterator(),
-                    false).toList();
-            model.addAttribute("locations", locations);
+            loadSubList(model);
 
             model.addAttribute("equipments", equipments);
 
@@ -58,10 +46,7 @@ public class EquipmentController {
         if (!query.isEmpty()){
             List<Equipment> equipments = equipmentService.getResultImpreciseSearch(query);
 
-            // select of locations
-            List<Location> locations = StreamSupport.stream(locationService.getAll().spliterator(),
-                    false).toList();
-            model.addAttribute("locations", locations);
+            loadSubList(model);
 
             model.addAttribute("equipments", equipments);
 
@@ -74,20 +59,27 @@ public class EquipmentController {
                          @RequestParam(value = "weight") String weightAsString,
                          @RequestParam(value = "yearOfEntry") String yearOfEntryAsString,
                          @RequestParam(value = "count") String countAsString,
-                         @RequestParam(value = "location") String locationAsString, Map<String, Object> model){
+                         @RequestParam(value = "location") String locationAsString, Model model){
         equipmentService.addFromView(inventoryNumber, weightAsString, yearOfEntryAsString, countAsString,
                 locationAsString);
 
-        List<Equipment> equipments = StreamSupport.stream(equipmentService.getAll().spliterator(),
-                false).toList();
+        loadListWithSubList(model);
+        return "equipment_control";
+    }
 
-        // select of locations
+    private void loadSubList(Model model){
         List<Location> locations = StreamSupport.stream(locationService.getAll().spliterator(),
                 false).toList();
-        model.put("locations", locations);
+        model.addAttribute("locations", locations);
+    }
 
-        model.put("equipments", equipments);
+    private void loadListWithSubList(Model model){
+        List<Location> locations = StreamSupport.stream(locationService.getAll().spliterator(),
+                false).toList();
+        model.addAttribute("locations", locations);
 
-        return "equipment_control";
+        List<Equipment> equipments = StreamSupport.stream(equipmentService.getAll().spliterator(),
+                false).toList();
+        model.addAttribute("equipments", equipments);
     }
 }

@@ -32,19 +32,33 @@ public class EquipmentService {
         return desired;
     }
 
-    public void add(Equipment equipment){
+    public void updateFromView(String id, String inventoryNumber, String weightAsString, String yearOfEntryAsString,
+                               String countAsString, String locationAsString){
+        Equipment equipment = convertDataFromForm(inventoryNumber, weightAsString, yearOfEntryAsString,
+                countAsString, locationAsString);
+        equipment.setId(Long.parseLong(id));
+
         equipmentRepository.save(equipment);
     }
 
     public void addFromView(String inventoryNumber, String weightAsString, String yearOfEntryAsString,
                             String countAsString, String locationAsString){
+        equipmentRepository.save(convertDataFromForm(inventoryNumber, weightAsString, yearOfEntryAsString,
+                countAsString, locationAsString));
+    }
+
+    private Equipment convertDataFromForm(String inventoryNumber, String weightAsString, String yearOfEntryAsString,
+                                         String countAsString, String locationAsString){
         double weight = Double.parseDouble(weightAsString);
         Year yearOfEntry = Year.parse(yearOfEntryAsString);
         int count = Integer.parseInt(countAsString);
         Location location = locationService.getById(Long.parseLong(locationAsString));
 
-        Equipment equipment = new Equipment(inventoryNumber, weight, yearOfEntry, count, location);
-
-        equipmentRepository.save(equipment);
+        return new Equipment(inventoryNumber, weight, yearOfEntry, count, location);
     }
+
+    public Equipment getById(Long id){
+        return equipmentRepository.findById(id).orElseThrow();
+    }
+    public void deleteById(Long id) { equipmentRepository.deleteById(id); }
 }
