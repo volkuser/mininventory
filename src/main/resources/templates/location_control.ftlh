@@ -30,6 +30,7 @@
                             </td>
                             <td>${location.operatingHours}</td>
                             <td>${location.openFrom}</td>
+                            <td><a href="location/more/${location.id}">More</a></td>
                         </tr>
                     <#else>
                         <td>no locations</td>
@@ -62,7 +63,7 @@
                     <div class="mb-3">
                         <label class="form-label">Number</label>
                         <label>
-                            <input type="number" class="form-control" name="number" min="1" value="1">
+                            <input type="number" class="form-control" name="number" min="1">
                         </label>
                     </div>
                     <div class="mb-3">

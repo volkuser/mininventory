@@ -63,20 +63,35 @@ public class LocationService {
         return fusion(desiredByNumber, desiredByLetter);
     }
 
-    public void add(Location location){
+    public void updateFromView(String id, String numberAsString, String additionLetterAsString,
+                               String isAuditoryAsString, String operatingHoursAsString, String openFromAsString){
+        Location location = convertDataFromForm(numberAsString, additionLetterAsString, isAuditoryAsString,
+                operatingHoursAsString, openFromAsString);
+        location.setId(Long.parseLong(id));
+
         locationRepository.save(location);
     }
 
     public void addFromView(String numberAsString, String additionLetterAsString, String isAuditoryAsString,
                             String operatingHoursAsString, String openFromAsString){
+
+        locationRepository.save(convertDataFromForm(numberAsString, additionLetterAsString, isAuditoryAsString,
+                operatingHoursAsString, openFromAsString));
+    }
+
+    private Location convertDataFromForm(String numberAsString, String additionLetterAsString,
+                                         String isAuditoryAsString, String operatingHoursAsString,
+                                         String openFromAsString){
         byte number = Byte.parseByte(numberAsString);
         char additionLetter = (additionLetterAsString.isEmpty()) ? 'x' : additionLetterAsString.charAt(0);
         boolean isAuditory = isAuditoryAsString != null;
-        Time operatingHours = Time.valueOf(operatingHoursAsString + ":00");
+        Time operatingHours;
+        try {
+            operatingHours = Time.valueOf(operatingHoursAsString + ":00");
+        } catch (Exception exception) { operatingHours = Time.valueOf(operatingHoursAsString); }
         Date openFrom = Date.valueOf(openFromAsString);
 
-        Location location = new Location(number, additionLetter, isAuditory, operatingHours, openFrom);
-        locationRepository.save(location);
+        return new Location(number, additionLetter, isAuditory, operatingHours, openFrom);
     }
 
     public Location getById(Long id){

@@ -1,5 +1,7 @@
 package com.example.mininventory.models;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.Id;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,6 +19,7 @@ public class Location {
     private char additionLetter;
     private boolean isAuditory;
     private Time OperatingHours;
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
     private Date OpenFrom;
 
     public Location() { }

@@ -24,6 +24,7 @@
                             <td>${equipment.yearOfEntry}</td>
                             <td>${equipment.count}</td>
                             <td>${equipment.location.number}</td>
+                            <td><a href="equipment/more/${equipment.id}">More</a></td>
                         </tr>
                     <#else>
                         <td>no equipments</td>
