@@ -14,10 +14,15 @@ public class LocationItemController {
 
     @GetMapping("/location/more/{id}")
     public String more(@PathVariable("id") String id, Model model){
-
         getAndLoadLocation(model, id);
-
         return "location_item_control";
+    }
+
+    private void getAndLoadLocation(Model model, String id){
+        Location location = locationService.getById(Long.parseLong(id));
+        model.addAttribute("selectedLocation", location);
+        // for date
+        model.addAttribute("openFrom", location.getOpenFrom().toString());
     }
 
     @PostMapping("/location/more/{id}")
@@ -29,7 +34,6 @@ public class LocationItemController {
         locationService.updateFromView(id, number, additionLetter, isAuditory, operatingHours, openFrom);
 
         getAndLoadLocation(model, id);
-
         return "location_item_control";
     }
 
@@ -42,12 +46,5 @@ public class LocationItemController {
             getAndLoadLocation(model, id);
             return "redirect:/location/more/{id}";
         }
-    }
-
-    private void getAndLoadLocation(Model model, String id){
-        Location location = locationService.getById(Long.parseLong(id));
-        model.addAttribute("selectedLocation", location);
-        // for date
-        model.addAttribute("openFrom", location.getOpenFrom().toString());
     }
 }
