@@ -14,7 +14,7 @@ public class Location {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long Id;
 
-    @Positive(message = "value cannot be negative")
+    @Positive(message = "value cannot be negative or null")
     private byte number;
     private char additionLetter;
     private boolean isAuditory;

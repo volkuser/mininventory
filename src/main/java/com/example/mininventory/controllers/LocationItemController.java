@@ -2,7 +2,6 @@ package com.example.mininventory.controllers;
 
 import com.example.mininventory.models.Location;
 import com.example.mininventory.services.LocationService;
-import net.bytebuddy.dynamic.scaffold.FieldRegistry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,7 +9,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.sql.Date;
 import java.sql.Time;
 import java.util.Map;
 
@@ -32,7 +30,6 @@ public class LocationItemController {
         //model.addAttribute("operatingHours", location.getOperatingHours().toString());
         model.addAttribute("openFrom", location.getOpenFrom().toString());
     }
-
     /*@PostMapping("/location/more/{id}")
     public String update(@PathVariable("id") String id, @RequestParam(value = "number" ) String number,
                          @RequestParam(value = "additionLetter", required = false) String additionLetter,
@@ -47,7 +44,7 @@ public class LocationItemController {
 
     @PostMapping("/location/more/{id}")
     public String update(@Valid @ModelAttribute("selectedLocation") Location location, BindingResult bindingResult,
-                         /*@RequestParam(value = "openFrom") Date openFromAsString,*/
+                         // specific
                          @RequestParam(value = "operatingHoursAsString") String operatingHoursAsString,
                          @RequestParam(value = "isAuditoryAsString", defaultValue = "off") String isAuditoryAsString,
                          Model model){
@@ -55,13 +52,14 @@ public class LocationItemController {
             Map<String, String> errorsMap = ControllerUtils.getErrors(bindingResult);
             model.mergeAttributes(errorsMap);
         } else {
+            // specific
             location.setAuditory(isAuditoryAsString.equals("on"));
             try {
                 location.setOperatingHours(Time.valueOf(operatingHoursAsString + ":00"));
             } catch (Exception ignored) {
                 location.setOperatingHours(locationService.getById(location.getId()).getOperatingHours());
             }
-            locationService.update(location);
+            locationService.save(location);
         }
 
         getAndLoadLocation(model, location.getId().toString());

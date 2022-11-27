@@ -60,35 +60,53 @@
             <div class="p-2">
                 <h5>Add new location</h5>
                 <form method="post">
-                    <div class="mb-3">
-                        <label class="form-label">Number</label>
-                        <label>
-                            <input type="number" class="form-control" name="number" min="1">
-                        </label>
+                    <div class="mb-3 d-flex flex-row align-items-center">
+                        <label class="form-label" for="number_id">Number</label>
+                        <div class="p-2 d-flex flex-row">
+                            <div class="d-flex flex-row">
+                                <input id="number_id" type="number" value="1" name="number"
+                                       class="form-control ${(numberError??)?string('is-invalid', '')} p-2">
+                                <#if numberError??>
+                                    <div class="invalid-feedback p-2">
+                                        ${numberError}
+                                    </div>
+                                </#if>
+                            </div>
+                        </div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Addition letter</label>
                         <label>
-                            <input type="text" class="form-control" maxlength="1" name="additionLetter">
+                            <input type="text" class="form-control" maxlength="1" name="additionLetter"
+                                   value="x">
                         </label>
                     </div>
                     <div class="mb-3 form-check">
                         <label>
-                            <input type="checkbox" class="form-check-input" name="isAuditory">
+                            <input type="checkbox" class="form-check-input" name="isAuditoryAsString"/>
                         </label>
                         <label class="form-check-label">Is auditory</label>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Operation hours</label>
                         <label>
-                            <input type="time" class="form-control" name="operatingHours">
+                            <input type="time" class="form-control" name="operatingHoursAsString"
+                                   value="<#if operatingHoursAsString??>${selectedLocation.operatingHours}</#if>">
                         </label>
                     </div>
-                    <div class="mb-3">
-                        <label class="form-label">Open from</label>
-                        <label>
-                            <input type="date" class="form-control" name="openFrom">
-                        </label>
+                    <div class="mb-3 d-flex flex-row align-items-center">
+                        <label class="form-label" for="openFrom_id">Open from</label>
+                        <div class="p-2 d-flex flex-row">
+                            <div class="d-flex flex-row">
+                                <input id="openFrom_id" type="date" value="<#if openFrom??>${openFrom}</#if>" name="openFrom"
+                                       class="form-control ${(openFromError??)?string('is-invalid', '')} p-2">
+                                <#if openFromError??>
+                                    <div class="invalid-feedback p-2">
+                                        ${openFromError}
+                                    </div>
+                                </#if>
+                            </div>
+                        </div>
                     </div>
                     <button type="submit" class="btn btn-primary">Add</button>
                 </form>

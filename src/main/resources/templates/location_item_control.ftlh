@@ -40,11 +40,6 @@
                 <input type="time" class="form-control" name="operatingHoursAsString"
                     value="${selectedLocation.operatingHours}">
             </label>
-            <#if numberError??>
-                <div class="invalid-feedback">
-                    ${numberError}
-                </div>
-            </#if>
         </div>
         <div class="mb-3 d-flex flex-row align-items-center">
             <label class="form-label" for="openFrom_id">Open from</label>
