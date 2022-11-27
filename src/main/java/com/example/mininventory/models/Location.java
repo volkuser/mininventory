@@ -1,11 +1,10 @@
 package com.example.mininventory.models;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 import javax.persistence.Id;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.validation.constraints.*;
 import java.sql.Date;
 import java.sql.Time;
 
@@ -15,12 +14,14 @@ public class Location {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long Id;
 
+    @Positive(message = "value cannot be negative")
     private byte number;
     private char additionLetter;
     private boolean isAuditory;
-    private Time OperatingHours;
-    @DateTimeFormat(pattern = "dd-MM-yyyy")
-    private Date OpenFrom;
+    private Time operatingHours;
+    //@DateTimeFormat(pattern = "dd-MM-yyyy")
+    @PastOrPresent(message = "date must be in past or present")
+    private Date openFrom;
 
     public Location() { }
 
@@ -28,8 +29,8 @@ public class Location {
         this.number = number;
         this.additionLetter = additionLetter;
         this.isAuditory = isAuditory;
-        OperatingHours = operatingHours;
-        OpenFrom = openFrom;
+        this.operatingHours = operatingHours;
+        this.openFrom = openFrom;
     }
 
     public Long getId() {
@@ -40,9 +41,7 @@ public class Location {
         Id = id;
     }
 
-    public byte getNumber() {
-        return number;
-    }
+    public byte getNumber() { return number; }
 
     public void setNumber(byte number) {
         this.number = number;
@@ -65,18 +64,18 @@ public class Location {
     }
 
     public Time getOperatingHours() {
-        return OperatingHours;
+        return operatingHours;
     }
 
     public void setOperatingHours(Time operatingHours) {
-        OperatingHours = operatingHours;
+        this.operatingHours = operatingHours;
     }
 
     public Date getOpenFrom() {
-        return OpenFrom;
+        return openFrom;
     }
 
     public void setOpenFrom(Date openFrom) {
-        OpenFrom = openFrom;
+        this.openFrom = openFrom;
     }
 }

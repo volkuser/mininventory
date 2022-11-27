@@ -4,7 +4,10 @@ import com.example.mininventory.models.Location;
 import com.example.mininventory.repos.LocationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 
+import javax.validation.Valid;
 import java.sql.Date;
 import java.sql.Time;
 import java.util.ArrayList;
@@ -54,7 +57,7 @@ public class LocationService {
     public List<Location> getResultImpreciseSearch(String query) {
         List<Location> desiredByNumber = new ArrayList<>(), desiredByLetter = new ArrayList<>();
         for (Location location : locationRepository.findAll())
-            if (Byte.toString(location.getNumber()).contains(query)) desiredByNumber.add(location);
+            if (Integer.toString(location.getNumber()).contains(query)) desiredByNumber.add(location);
         try {
             // imprecise search for char is identical to exact search for char
             desiredByLetter = locationRepository.findByAdditionLetter(query.charAt(0));
@@ -69,6 +72,10 @@ public class LocationService {
                 operatingHoursAsString, openFromAsString);
         location.setId(Long.parseLong(id));
 
+        locationRepository.save(location);
+    }
+
+    public void update(Location location){
         locationRepository.save(location);
     }
 
