@@ -7,10 +7,13 @@ import com.example.mininventory.services.LocationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.StreamSupport;
@@ -54,14 +57,33 @@ public class EquipmentController {
         } else return "redirect:/equipment";
     }
 
-    @PostMapping("/equipment")
-    public String adding(@RequestParam(value = "inventoryNumber") String inventoryNumber,
+    /*@PostMapping("/equipment")
+    public String add(@RequestParam(value = "inventoryNumber") String inventoryNumber,
                          @RequestParam(value = "weight") String weightAsString,
                          @RequestParam(value = "yearOfEntry") String yearOfEntryAsString,
                          @RequestParam(value = "count") String countAsString,
                          @RequestParam(value = "location") String locationAsString, Model model){
         equipmentService.addFromView(inventoryNumber, weightAsString, yearOfEntryAsString, countAsString,
                 locationAsString);
+
+        loadListWithSubList(model);
+        return "equipment_control";
+    }*/
+    @PostMapping("/equipment")
+    public String add(@Valid @ModelAttribute(value = "selectedEquipment") Equipment equipment,
+                      BindingResult bindingResult, Model model, // specific is down
+                      @RequestParam(value = "location") String locationAsString){
+        if (bindingResult.hasErrors()) {
+            Map<String, String> errorsMap = ControllerUtils.getErrors(bindingResult);
+            model.mergeAttributes(errorsMap);
+        } else {
+            try {
+                equipment.setLocation(locationService.getById(Long.parseLong(locationAsString)));
+            } catch (Exception ignored) {
+                equipment.setLocation(equipmentService.getById(equipment.getId()).getLocation());
+            }
+            equipmentService.save(equipment);
+        }
 
         loadListWithSubList(model);
         return "equipment_control";

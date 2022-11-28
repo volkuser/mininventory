@@ -18,19 +18,12 @@
                 </div>
             </div>
         </div>
-        <div class="mb-3 d-flex flex-row align-items-center">
+        <div class="mb-3">
             <label class="form-label" for="weight_id">Weight</label>
-            <div class="p-2 d-flex flex-row">
-                <div class="d-flex flex-row">
-                    <input id="weight_id" type="number" name="weight" value="${weight}"
-                           class="form-control ${(weightError??)?string('is-invalid', '')} p-2" step="0.1">
-                    <#if weightError??>
-                        <div class="invalid-feedback p-2">
-                            ${weightError}
-                        </div>
-                    </#if>
-                </div>
-            </div>
+            <label>
+                <input id="weight_id" type="number" name="weight" value="${weight}"
+                       class="form-control p-2" step="0.1">
+            </label>
         </div>
         <div class="mb-3">
             <label class="form-label">Year of entry</label>

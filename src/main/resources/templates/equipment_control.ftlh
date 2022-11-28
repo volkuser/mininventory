@@ -54,30 +54,47 @@
             <div class="p-2">
                 <h5>Add new equipment</h5>
                 <form method="post">
-                    <div class="mb-3">
-                        <label class="form-label">Inventory number</label>
-                        <label>
-                            <input type="text" class="form-control" name="inventoryNumber">
-                        </label>
+                    <div class="mb-3 d-flex flex-row align-items-center">
+                        <label class="form-label" for="inventoryNumber_id">Inventory number</label>
+                        <div class="p-2 d-flex flex-row">
+                            <div class="d-flex flex-row">
+                                <input id="inventoryNumber_id" type="text" name="inventoryNumber"
+                                       class="form-control ${(inventoryNumberError??)?string('is-invalid', '')} p-2">
+                                <#if inventoryNumberError??>
+                                    <div class="invalid-feedback p-2">
+                                        ${inventoryNumberError}
+                                    </div>
+                                </#if>
+                            </div>
+                        </div>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Weight</label>
+                        <label class="form-label" for="weight_id">Weight</label>
                         <label>
-                            <input type="number" class="form-control" value="0.01" min="0.01" step="0.01" name="weight">
+                            <input id="weight_id" type="number" name="weight" value="0.1"
+                                   class="form-control p-2" step="0.1">
                         </label>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Year of entry</label>
                         <label>
-                            <input type="number" class="form-control" name="yearOfEntry" value="1900"
-                                   min="1900" max="2999">
+                            <input type="number" class="form-control" name="yearOfEntry" min="1900" max="2999"
+                                   value="1900">
                         </label>
                     </div>
-                    <div class="mb-3">
-                        <label class="form-label">Count</label>
-                        <label>
-                            <input type="number" class="form-control" value="1" min="1" name="count">
-                        </label>
+                    <div class="mb-3 d-flex flex-row align-items-center">
+                        <label class="form-label" for="count_id">Count</label>
+                        <div class="p-2 d-flex flex-row">
+                            <div class="d-flex flex-row">
+                                <input id="count_id" type="number" value="1" name="count"
+                                       class="form-control ${(countError??)?string('is-invalid', '')} p-2">
+                                <#if countError??>
+                                    <div class="invalid-feedback p-2">
+                                        ${countError}
+                                    </div>
+                                </#if>
+                            </div>
+                        </div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Location</label>

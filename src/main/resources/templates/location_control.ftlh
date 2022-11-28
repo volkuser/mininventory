@@ -21,13 +21,7 @@
                             <td>${location.id}</td>
                             <td>${location.number}</td>
                             <td>${location.additionLetter}</td>
-                            <td>
-                                <#if location.isAuditory()>
-                                    yes
-                                <#else>
-                                    no
-                                </#if>
-                            </td>
+                            <td><#if location.isAuditory()>yes<#else>no</#if></td>
                             <td>${location.operatingHours}</td>
                             <td>${location.openFrom}</td>
                             <td><a href="location/more/${location.id}">More</a></td>
