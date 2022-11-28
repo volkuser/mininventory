@@ -7,12 +7,12 @@ import com.example.mininventory.services.LocationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.StreamSupport;
 
 @Controller
@@ -39,7 +39,7 @@ public class EquipmentIemController {
                 String.valueOf(equipment.getWeight()).replace(',', '.'));
     }
 
-    @PostMapping("/equipment/more/{id}")
+    /*@PostMapping("/equipment/more/{id}")
     public String update(@PathVariable("id") String id,
                          @RequestParam(value = "inventoryNumber") String inventoryNumberAsString,
                          @RequestParam(value = "weight") String weightAsString,
@@ -51,6 +51,25 @@ public class EquipmentIemController {
 
         getAndLoadLocation(model, id);
 
+        return "equipment_item_control";
+    }*/
+    @PostMapping("/equipment/more/{id}")
+    public String update(@Valid @ModelAttribute(value = "selectedEquipment") Equipment equipment,
+                         BindingResult bindingResult, Model model, // specific is down
+                         @RequestParam(value = "location") String locationAsString){
+        if (bindingResult.hasErrors()) {
+            Map<String, String> errorsMap = ControllerUtils.getErrors(bindingResult);
+            model.mergeAttributes(errorsMap);
+        } else {
+            try {
+                equipment.setLocation(locationService.getById(Long.parseLong(locationAsString)));
+            } catch (Exception ignored) {
+                equipment.setLocation(equipmentService.getById(equipment.getId()).getLocation());
+            }
+            equipmentService.save(equipment);
+        }
+
+        getAndLoadLocation(model, equipment.getId().toString());
         return "equipment_item_control";
     }
 

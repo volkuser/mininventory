@@ -32,6 +32,10 @@ public class EquipmentService {
         return desired;
     }
 
+    public void save(Equipment equipment){
+        equipmentRepository.save(equipment);
+    }
+
     public void updateFromView(String id, String inventoryNumber, String weightAsString, String yearOfEntryAsString,
                                String countAsString, String locationAsString){
         Equipment equipment = convertDataFromForm(inventoryNumber, weightAsString, yearOfEntryAsString,

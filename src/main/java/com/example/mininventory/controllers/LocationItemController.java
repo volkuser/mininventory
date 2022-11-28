@@ -44,10 +44,9 @@ public class LocationItemController {
 
     @PostMapping("/location/more/{id}")
     public String update(@Valid @ModelAttribute("selectedLocation") Location location, BindingResult bindingResult,
-                         // specific
+                         Model model, // specific is down
                          @RequestParam(value = "operatingHoursAsString") String operatingHoursAsString,
-                         @RequestParam(value = "isAuditoryAsString", defaultValue = "off") String isAuditoryAsString,
-                         Model model){
+                         @RequestParam(value = "isAuditoryAsString", defaultValue = "off") String isAuditoryAsString){
         if (bindingResult.hasErrors()){
             Map<String, String> errorsMap = ControllerUtils.getErrors(bindingResult);
             model.mergeAttributes(errorsMap);

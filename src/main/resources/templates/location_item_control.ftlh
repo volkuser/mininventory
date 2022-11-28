@@ -7,7 +7,7 @@
             <label class="form-label" for="number_id">Number</label>
             <div class="p-2 d-flex flex-row">
                 <div class="d-flex flex-row">
-                    <input id="number_id" type="number" value="${selectedLocation.number!'1'}" name="number"
+                    <input id="number_id" type="number" value="${selectedLocation.number}" name="number"
                            class="form-control ${(numberError??)?string('is-invalid', '')} p-2">
                     <#if numberError??>
                         <div class="invalid-feedback p-2">
