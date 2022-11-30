@@ -52,19 +52,6 @@ public class LocationController {
         } else return "redirect:/location";
     }
 
-    /*@PostMapping("/location")
-    public String add(@RequestParam(value = "number" ) String numberAsString,
-                         @RequestParam(value = "additionLetter", required = false)
-                         String additionLetterAsString,
-                         @RequestParam(value = "isAuditory", required = false) String isAuditoryAsString,
-                         @RequestParam(value = "operatingHours") String operatingHoursAsString,
-                         @RequestParam(value = "openFrom") String openFromAsString, Model model) {
-        locationService.addFromView(numberAsString, additionLetterAsString, isAuditoryAsString,
-                operatingHoursAsString, openFromAsString);
-
-        loadList(model);
-        return "location_control";
-    }*/
     @PostMapping("/location")
     public String add(@Valid @ModelAttribute("selectedLocation") Location location, BindingResult bindingResult,
                       @RequestParam(value = "operatingHoursAsString") String operatingHoursAsString,

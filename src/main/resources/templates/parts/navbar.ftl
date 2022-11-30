@@ -12,10 +12,19 @@
                     <a class="nav-link" href="/home">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/equipment">Equipment</a>
+                    <a class="nav-link" href="/equipment">Equipments</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/location">Location</a>
+                    <a class="nav-link" href="/location">Locations</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/commission">Commissions</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/user">Users</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/employee">Employees</a>
                 </li>
             </ul>
         </div>

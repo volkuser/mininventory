@@ -31,6 +31,20 @@ public class EquipmentController {
         return "equipment_control";
     }
 
+    private void loadSubList(Model model){
+        List<Location> locations = StreamSupport.stream(locationService.getAll().spliterator(),
+                false).toList();
+        model.addAttribute("locations", locations);
+    }
+
+    private void loadListWithSubList(Model model){
+        List<Location> locations = StreamSupport.stream(locationService.getAll().spliterator(),
+                false).toList();
+        model.addAttribute("locations", locations);
+
+        loadSubList(model);
+    }
+
     @GetMapping("/equipment/exact")
     public String exactSearch(@RequestParam(value = "query" ) String query, Model model){
         if (!query.isEmpty()){
@@ -57,18 +71,6 @@ public class EquipmentController {
         } else return "redirect:/equipment";
     }
 
-    /*@PostMapping("/equipment")
-    public String add(@RequestParam(value = "inventoryNumber") String inventoryNumber,
-                         @RequestParam(value = "weight") String weightAsString,
-                         @RequestParam(value = "yearOfEntry") String yearOfEntryAsString,
-                         @RequestParam(value = "count") String countAsString,
-                         @RequestParam(value = "location") String locationAsString, Model model){
-        equipmentService.addFromView(inventoryNumber, weightAsString, yearOfEntryAsString, countAsString,
-                locationAsString);
-
-        loadListWithSubList(model);
-        return "equipment_control";
-    }*/
     @PostMapping("/equipment")
     public String add(@Valid @ModelAttribute(value = "selectedEquipment") Equipment equipment,
                       BindingResult bindingResult, Model model, // specific is down
@@ -87,21 +89,5 @@ public class EquipmentController {
 
         loadListWithSubList(model);
         return "equipment_control";
-    }
-
-    private void loadSubList(Model model){
-        List<Location> locations = StreamSupport.stream(locationService.getAll().spliterator(),
-                false).toList();
-        model.addAttribute("locations", locations);
-    }
-
-    private void loadListWithSubList(Model model){
-        List<Location> locations = StreamSupport.stream(locationService.getAll().spliterator(),
-                false).toList();
-        model.addAttribute("locations", locations);
-
-        List<Equipment> equipments = StreamSupport.stream(equipmentService.getAll().spliterator(),
-                false).toList();
-        model.addAttribute("equipments", equipments);
     }
 }
