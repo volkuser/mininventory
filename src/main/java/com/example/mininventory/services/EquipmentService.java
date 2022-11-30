@@ -14,8 +14,6 @@ import java.util.List;
 public class EquipmentService {
     @Autowired
     private EquipmentRepository equipmentRepository;
-    @Autowired
-    private LocationService locationService;
 
     public Iterable<Equipment> getAll() { return equipmentRepository.findAll(); }
 
@@ -34,31 +32,6 @@ public class EquipmentService {
 
     public void save(Equipment equipment){
         equipmentRepository.save(equipment);
-    }
-
-    public void updateFromView(String id, String inventoryNumber, String weightAsString, String yearOfEntryAsString,
-                               String countAsString, String locationAsString){
-        Equipment equipment = convertDataFromForm(inventoryNumber, weightAsString, yearOfEntryAsString,
-                countAsString, locationAsString);
-        equipment.setId(Long.parseLong(id));
-
-        equipmentRepository.save(equipment);
-    }
-
-    public void addFromView(String inventoryNumber, String weightAsString, String yearOfEntryAsString,
-                            String countAsString, String locationAsString){
-        equipmentRepository.save(convertDataFromForm(inventoryNumber, weightAsString, yearOfEntryAsString,
-                countAsString, locationAsString));
-    }
-
-    private Equipment convertDataFromForm(String inventoryNumber, String weightAsString, String yearOfEntryAsString,
-                                         String countAsString, String locationAsString){
-        double weight = Double.parseDouble(weightAsString);
-        Year yearOfEntry = Year.parse(yearOfEntryAsString);
-        int count = Integer.parseInt(countAsString);
-        Location location = locationService.getById(Long.parseLong(locationAsString));
-
-        return new Equipment(inventoryNumber, weight, yearOfEntry, count, location);
     }
 
     public Equipment getById(Long id){
