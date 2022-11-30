@@ -92,7 +92,7 @@
                         <label class="form-label" for="openFrom_id">Open from</label>
                         <div class="p-2 d-flex flex-row">
                             <div class="d-flex flex-row">
-                                <input id="openFrom_id" type="date" value="<#if openFrom??>${openFrom}</#if>" name="openFrom"
+                                <input id="openFrom_id" type="date" name="openFrom"
                                        class="form-control ${(openFromError??)?string('is-invalid', '')} p-2">
                                 <#if openFromError??>
                                     <div class="invalid-feedback p-2">

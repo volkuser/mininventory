@@ -1,12 +1,13 @@
 package com.example.mininventory.models;
 
-import javax.persistence.Id;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.sql.Date;
 import java.sql.Time;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Location {
@@ -19,9 +20,14 @@ public class Location {
     private char additionLetter;
     private boolean isAuditory;
     private Time operatingHours;
-    //@DateTimeFormat(pattern = "dd-MM-yyyy")
+    @NotNull(message = "value cannot be null")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     @PastOrPresent(message = "date must be in past or present")
     private Date openFrom;
+
+    @OneToMany
+    @JoinColumn(name = "equipment_id")
+    private Set<Equipment> equipments = new HashSet<>();
 
     public Location() { }
 
