@@ -9,7 +9,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long Id;
 
-    @Email
+    @Email(message = "value is not email")
     private String email;
 
     @OneToOne(fetch = FetchType.LAZY, optional = false)

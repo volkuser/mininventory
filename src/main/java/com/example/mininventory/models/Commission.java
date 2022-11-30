@@ -13,7 +13,7 @@ public class Commission {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long Id;
 
-    private int number;
+    private String number;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date eventDate;
 
@@ -27,7 +27,7 @@ public class Commission {
                             nullable = false, updatable = false)})
     private Set<Commission> commissions = new HashSet<>();
 
-    public Commission(int number, Date eventDate) {
+    public Commission(String number, Date eventDate) {
         this.number = number;
         this.eventDate = eventDate;
     }
@@ -42,11 +42,11 @@ public class Commission {
         Id = id;
     }
 
-    public int getNumber() {
+    public String getNumber() {
         return number;
     }
 
-    public void setNumber(int number) {
+    public void setNumber(String number) {
         this.number = number;
     }
 
