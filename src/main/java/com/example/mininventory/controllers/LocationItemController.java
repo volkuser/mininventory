@@ -19,28 +19,14 @@ public class LocationItemController {
 
     @GetMapping("/location/more/{id}")
     public String more(@PathVariable("id") String id, Model model){
-        getAndLoadLocation(model, id);
+        getAndLoad(model, id);
         return "location_item_control";
     }
 
-    private void getAndLoadLocation(Model model, String id){
+    private void getAndLoad(Model model, String id){
         Location location = locationService.getById(Long.parseLong(id));
         model.addAttribute("selectedLocation", location);
-        // specific
-        //model.addAttribute("operatingHours", location.getOperatingHours().toString());
-        model.addAttribute("openFrom", location.getOpenFrom().toString());
     }
-    /*@PostMapping("/location/more/{id}")
-    public String update(@PathVariable("id") String id, @RequestParam(value = "number" ) String number,
-                         @RequestParam(value = "additionLetter", required = false) String additionLetter,
-                         @RequestParam(value = "isAuditory", required = false) String isAuditory,
-                         @RequestParam(value = "operatingHours") String operatingHours,
-                         @RequestParam(value = "openFrom") String openFrom, Model model){
-        locationService.updateFromView(id, number, additionLetter, isAuditory, operatingHours, openFrom);
-
-        getAndLoadLocation(model, id);
-        return "location_item_control";
-    }*/
 
     @PostMapping("/location/more/{id}")
     public String update(@Valid @ModelAttribute("selectedLocation") Location location, BindingResult bindingResult,
@@ -61,7 +47,7 @@ public class LocationItemController {
             locationService.save(location);
         }
 
-        getAndLoadLocation(model, location.getId().toString());
+        getAndLoad(model, location.getId().toString());
         return "location_item_control";
     }
 
@@ -71,7 +57,7 @@ public class LocationItemController {
             locationService.deleteById(Long.parseLong(id));
             return "redirect:/location";
         } catch (Exception exception) {
-            getAndLoadLocation(model, id);
+            getAndLoad(model, id);
             return "redirect:/location/more/{id}";
         }
     }

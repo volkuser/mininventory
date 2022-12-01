@@ -24,11 +24,11 @@ public class EquipmentIemController {
 
     @GetMapping("/equipment/more/{id}")
     public String more(@PathVariable("id") String id, Model model){
-        getAndLoadLocation(model, id);
+        getAndLoad(model, id);
         return "equipment_item_control";
     }
 
-    private void getAndLoadLocation(Model model, String id){
+    private void getAndLoad(Model model, String id){
         List<Location> locations = StreamSupport.stream(locationService.getAll().spliterator(),
                 false).toList();
         model.addAttribute("locations", locations);
@@ -39,20 +39,6 @@ public class EquipmentIemController {
                 String.valueOf(equipment.getWeight()).replace(',', '.'));
     }
 
-    /*@PostMapping("/equipment/more/{id}")
-    public String update(@PathVariable("id") String id,
-                         @RequestParam(value = "inventoryNumber") String inventoryNumberAsString,
-                         @RequestParam(value = "weight") String weightAsString,
-                         @RequestParam(value = "yearOfEntry") String yearOfEntryAsString,
-                         @RequestParam(value = "count") String countAsString,
-                         @RequestParam(value = "location") String locationAsString, Model model){
-        equipmentService.updateFromView(id, inventoryNumberAsString, weightAsString, yearOfEntryAsString, countAsString,
-                locationAsString);
-
-        getAndLoadLocation(model, id);
-
-        return "equipment_item_control";
-    }*/
     @PostMapping("/equipment/more/{id}")
     public String update(@Valid @ModelAttribute(value = "selectedEquipment") Equipment equipment,
                          BindingResult bindingResult, Model model, // specific is down
@@ -69,7 +55,7 @@ public class EquipmentIemController {
             equipmentService.save(equipment);
         }
 
-        getAndLoadLocation(model, equipment.getId().toString());
+        getAndLoad(model, equipment.getId().toString());
         return "equipment_item_control";
     }
 
@@ -79,7 +65,7 @@ public class EquipmentIemController {
             equipmentService.deleteById(Long.parseLong(id));
             return "redirect:/equipment";
         } catch (Exception exception) {
-            getAndLoadLocation(model, id);
+            getAndLoad(model, id);
             return "redirect:/equipment/more/{id}";
         }
     }

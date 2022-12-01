@@ -18,7 +18,7 @@
                             <td>${employee.id}</td>
                             <td>${employee.surname}</td>
                             <td><#if employee.user??>${employee.user.email}<#else>empty</#if></td>
-                            <td><a href="user/more/${employee.id}">More</a></td>
+                            <td><a href="employee/more/${employee.id}">More</a></td>
                         </tr>
                     <#else>
                         <td>no employees</td>
@@ -61,16 +61,6 @@
                                 </#if>
                             </div>
                         </div>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">User</label>
-                        <label>
-                            <select name="user" class="form-control">
-                                <#list users as user>
-                                    <option value="${user.id}">${user.email}</option>
-                                </#list>
-                            </select>
-                        </label>
                     </div>
                     <button type="submit" class="btn btn-primary">Add</button>
                 </form>
