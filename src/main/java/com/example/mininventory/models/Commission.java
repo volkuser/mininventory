@@ -1,9 +1,12 @@
 package com.example.mininventory.models;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
-import java.sql.Date;
+import javax.validation.constraints.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -13,9 +16,16 @@ public class Commission {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long Id;
 
+    @NotBlank(message = "value cannot be empty")
+    @Pattern(regexp = "^[a-zA-Zа-яА-Я0-9]+$", message = "pattern for value - \"a-zA-Zа-яА-Я0-9\"")
     private String number;
+    @NotNull(message = "value cannot be null")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    @Future(message = "date must be in future")
     private Date eventDate;
+    @Nullable
+    @Transient
+    private String eventDateAsString;
 
     @ManyToMany
     @JoinTable(name = "employee_in_commission",
@@ -56,5 +66,11 @@ public class Commission {
 
     public void setEventDate(Date eventDate) {
         this.eventDate = eventDate;
+    }
+
+    @Nullable
+    public String getEventDateAsString() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        return sdf.format(eventDate);
     }
 }

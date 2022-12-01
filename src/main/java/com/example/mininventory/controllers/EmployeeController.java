@@ -74,18 +74,11 @@ public class EmployeeController {
     @PostMapping("/employee")
     public String add(@Valid @ModelAttribute(value = "selectedEmployee") Employee employee,
                       BindingResult bindingResult, Model model, // specific is down
-                      @RequestParam(value = "employee") String userAsString){
+                      @RequestParam(value = "user", required = false) String userAsString){
         if (bindingResult.hasErrors()) {
             Map<String, String> errorsMap = ControllerUtils.getErrors(bindingResult);
             model.mergeAttributes(errorsMap);
-        } else {
-            try {
-                employee.setUser(userService.getById(Long.parseLong(userAsString)));
-            } catch (Exception ignored) {
-                employee.setUser(employeeService.getById(employee.getId()).getUser());
-            }
-            employeeService.save(employee);
-        }
+        } else employeeService.save(employee);
 
         loadListWithSubList(model);
         return "employee_control";

@@ -12,8 +12,8 @@ public class User {
     @Email(message = "value is not email")
     private String email;
 
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "employee_id", nullable = false)
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "employee_id")
     private Employee employee;
 
     public User() { }

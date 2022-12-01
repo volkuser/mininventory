@@ -32,9 +32,9 @@ public class UserController {
     }
 
     private void loadSubList(Model model){
-        List<User> users = StreamSupport.stream(userService.getAll().spliterator(),
+        List<Employee> employees = StreamSupport.stream(employeeService.getAll().spliterator(),
                 false).toList();
-        model.addAttribute("users", users);
+        model.addAttribute("employees", employees);
     }
 
     private void loadListWithSubList(Model model){
@@ -74,18 +74,11 @@ public class UserController {
     @PostMapping("/user")
     public String add(@Valid @ModelAttribute(value = "selectedUser") User user,
                       BindingResult bindingResult, Model model, // specific is down
-                      @RequestParam(value = "employee") String employeeAsString){
+                      @RequestParam(value = "employee", required = false) String employeeAsString){
         if (bindingResult.hasErrors()) {
             Map<String, String> errorsMap = ControllerUtils.getErrors(bindingResult);
             model.mergeAttributes(errorsMap);
-        } else {
-            try {
-                user.setEmployee(employeeService.getById(Long.parseLong(employeeAsString)));
-            } catch (Exception ignored) {
-                user.setEmployee(userService.getById(user.getId()).getEmployee());
-            }
-            userService.save(user);
-        }
+        } else userService.save(user);
 
         loadListWithSubList(model);
         return "user_control";

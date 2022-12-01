@@ -65,7 +65,9 @@ public class LocationController {
             try {
                 location.setOperatingHours(Time.valueOf(operatingHoursAsString + ":00"));
             } catch (Exception ignored) {
-                location.setOperatingHours(locationService.getById(location.getId()).getOperatingHours());
+                try {
+                    location.setOperatingHours(locationService.getById(location.getId()).getOperatingHours());
+                } catch (Exception ignored1) {}
             }
             locationService.save(location);
         }

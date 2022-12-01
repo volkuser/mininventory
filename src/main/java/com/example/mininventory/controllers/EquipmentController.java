@@ -38,9 +38,9 @@ public class EquipmentController {
     }
 
     private void loadListWithSubList(Model model){
-        List<Location> locations = StreamSupport.stream(locationService.getAll().spliterator(),
+        List<Equipment> equipments = StreamSupport.stream(equipmentService.getAll().spliterator(),
                 false).toList();
-        model.addAttribute("locations", locations);
+        model.addAttribute("equipments", equipments);
 
         loadSubList(model);
     }

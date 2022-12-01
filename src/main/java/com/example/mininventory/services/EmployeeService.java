@@ -28,8 +28,8 @@ public class EmployeeService {
         return desired;
     }
 
-    public void save(Employee user){
-        employeeRepository.save(user);
+    public void save(Employee employee){
+        employeeRepository.save(employee);
     }
 
     public Employee getById(Long id){

@@ -1,6 +1,10 @@
 package com.example.mininventory.models;
 
+import org.springframework.lang.Nullable;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -10,10 +14,11 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long Id;
 
+    @NotBlank(message = "value cannot be empty")
+    @Pattern(regexp = "^[a-zA-Zа-яА-Я]+$", message = "only letters should be used in the value")
     private String surname;
 
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "user_id", nullable = false)
+    @OneToOne(mappedBy = "employee", cascade = CascadeType.ALL)
     private User user;
 
     @ManyToMany

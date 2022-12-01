@@ -1,10 +1,12 @@
 package com.example.mininventory.models;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
-import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.sql.Time;
 import java.util.HashSet;
 import java.util.Set;
@@ -24,6 +26,9 @@ public class Location {
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     @PastOrPresent(message = "date must be in past or present")
     private Date openFrom;
+    @Nullable
+    @Transient
+    private String openFromAsString;
 
     @OneToMany
     @JoinColumn(name = "equipment_id")
@@ -83,5 +88,11 @@ public class Location {
 
     public void setOpenFrom(Date openFrom) {
         this.openFrom = openFrom;
+    }
+
+    @Nullable
+    public String getOpenFromAsString() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        return sdf.format(openFrom);
     }
 }
