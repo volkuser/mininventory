@@ -1,12 +1,10 @@
 package com.example.mininventory.services;
 
 import com.example.mininventory.models.Equipment;
-import com.example.mininventory.models.Location;
 import com.example.mininventory.repos.EquipmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +12,7 @@ import java.util.List;
 public class EquipmentService {
     @Autowired
     private EquipmentRepository equipmentRepository;
+    @Autowired LocationService locationService;
 
     public Iterable<Equipment> getAll() { return equipmentRepository.findAll(); }
 
@@ -33,6 +32,9 @@ public class EquipmentService {
     public void save(Equipment equipment){
         equipmentRepository.save(equipment);
     }
+
+    public List<Equipment> getByLocationId(String locationIdAsString) {
+        return equipmentRepository.findByLocation(locationService.getById(Long.parseLong(locationIdAsString))); }
 
     public Equipment getById(Long id){
         return equipmentRepository.findById(id).orElseThrow();
