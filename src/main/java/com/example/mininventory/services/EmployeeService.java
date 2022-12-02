@@ -1,5 +1,6 @@
 package com.example.mininventory.services;
 
+import com.example.mininventory.models.Commission;
 import com.example.mininventory.models.Employee;
 import com.example.mininventory.repos.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,8 @@ import java.util.List;
 public class EmployeeService {
     @Autowired
     private EmployeeRepository employeeRepository;
+    @Autowired
+    private CommissionService commissionService;
 
     public Iterable<Employee> getAll() { return employeeRepository.findAll(); }
 
@@ -36,4 +39,14 @@ public class EmployeeService {
         return employeeRepository.findById(id).orElseThrow();
     }
     public void deleteById(Long id) { employeeRepository.deleteById(id); }
+
+    public void saveCommissionForHim(Employee employee, Commission commission){
+        employee.addInCommissions(commission);
+        save(employee);
+    }
+
+    public void deleteCommissionForHim(Employee employee, Commission commission){
+        employee.deleteFromCommissions(commission);
+        save(employee);
+    }
 }

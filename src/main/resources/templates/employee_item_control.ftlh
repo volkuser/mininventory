@@ -18,6 +18,8 @@
             </div>
         </div>
         <a type="button" class="btn btn-primary" href="/employee">Back</a>
+        <button type="submit" class="btn btn-primary"
+                formmethod="get" formaction="/employee/more/${selectedEmployee.id}/list">Commission list</button>
         <button type="submit" formmethod="post" class="btn btn-primary">Update</button>
         <button type="submit" class="btn btn-primary"
                 formmethod="post" formaction="/employee/more/${selectedEmployee.id}/delete">Delete</button>

@@ -61,4 +61,20 @@ public class Employee {
     public void setUser(User user) {
         this.user = user;
     }
+
+    public Set<Commission> getCommissions() {
+        return commissions;
+    }
+
+    public void setCommissions(Set<Commission> commissions) {
+        this.commissions = commissions;
+    }
+
+    public void addInCommissions(Commission commission) {
+        this.commissions.add(commission);
+    }
+
+    public void deleteFromCommissions(Commission commission) {
+        this.commissions.remove(commission);
+    }
 }
