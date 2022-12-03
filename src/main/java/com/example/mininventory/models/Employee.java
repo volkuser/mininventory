@@ -21,7 +21,7 @@ public class Employee {
     @OneToOne(mappedBy = "employee", cascade = CascadeType.ALL)
     private User user;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "employee_in_commission",
             joinColumns = {
                     @JoinColumn(name = "employee_id", referencedColumnName = "id",

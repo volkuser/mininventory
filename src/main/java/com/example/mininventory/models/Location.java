@@ -30,7 +30,7 @@ public class Location {
     @Transient
     private String openFromAsString;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "equipment_id")
     private Set<Equipment> equipments = new HashSet<>();
 

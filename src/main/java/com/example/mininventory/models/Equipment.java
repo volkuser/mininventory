@@ -20,7 +20,7 @@ public class Equipment {
     @Positive(message = "value cannot be negative or null")
     private int count;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "location_id")
     private Location location;
 

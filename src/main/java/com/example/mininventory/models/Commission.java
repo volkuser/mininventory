@@ -27,7 +27,7 @@ public class Commission {
     @Transient
     private String eventDateAsString;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "employee_in_commission",
             joinColumns = {
                     @JoinColumn(name = "employee_id", referencedColumnName = "id",
