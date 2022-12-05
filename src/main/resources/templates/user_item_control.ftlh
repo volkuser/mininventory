@@ -1,3 +1,4 @@
+<#--
 <#import "parts/common.ftl" as c>
 
 <@c.page>
@@ -38,4 +39,4 @@
         <button type="submit" class="btn btn-primary"
                 formmethod="post" formaction="/user/more/${selectedUser.id}/delete">Delete</button>
     </form>
-</@c.page>
+</@c.page>-->

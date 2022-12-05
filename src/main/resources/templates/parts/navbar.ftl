@@ -20,13 +20,19 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/commission">Commissions</a>
                 </li>
-                <li class="nav-item">
+                <#--<li class="nav-item">
                     <a class="nav-link" href="/user">Users</a>
-                </li>
+                </li>-->
                 <li class="nav-item">
                     <a class="nav-link" href="/employee">Employees</a>
                 </li>
             </ul>
+            <div>
+                <form action="/logout" method="post">
+                    <div><input type="hidden" name="_csrf" value="${_csrf.token}"></div>
+                    <input class="btn btn-ark" type="submit" value="Sign Out"/>
+                </form>
+            </div>
         </div>
     </div>
 </nav>

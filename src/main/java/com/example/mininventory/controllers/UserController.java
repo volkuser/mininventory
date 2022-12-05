@@ -1,3 +1,4 @@
+/*
 package com.example.mininventory.controllers;
 
 import com.example.mininventory.models.Employee;
@@ -84,3 +85,4 @@ public class UserController {
         return "user_control";
     }
 }
+*/

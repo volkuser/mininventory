@@ -1,8 +1,12 @@
+/*
 package com.example.mininventory.services;
 
 import com.example.mininventory.models.User;
 import com.example.mininventory.repos.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -37,3 +41,4 @@ public class UserService {
     }
     public void deleteById(Long id) { userRepository.deleteById(id); }
 }
+*/

@@ -2,7 +2,6 @@ package com.example.mininventory.controllers;
 
 import com.example.mininventory.models.Employee;
 import com.example.mininventory.services.EmployeeService;
-import com.example.mininventory.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
