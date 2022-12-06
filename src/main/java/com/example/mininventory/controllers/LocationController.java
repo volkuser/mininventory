@@ -3,6 +3,8 @@ package com.example.mininventory.controllers;
 import com.example.mininventory.models.Location;
 import com.example.mininventory.services.LocationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

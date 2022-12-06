@@ -55,6 +55,7 @@
                 </div>
             </div>
         </div>
+        <div><input type="hidden" name="_csrf" value="${_csrf.token}"></div>
         <a type="button" class="btn btn-primary" href="/location">Back</a>
         <button type="submit" class="btn btn-primary"
                 formmethod="get" formaction="/location/more/${selectedLocation.id}/list">Equipment list</button>

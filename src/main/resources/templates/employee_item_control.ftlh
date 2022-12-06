@@ -17,6 +17,7 @@
                 </div>
             </div>
         </div>
+        <div><input type="hidden" name="_csrf" value="${_csrf.token}"></div>
         <a type="button" class="btn btn-primary" href="/employee">Back</a>
         <button type="submit" class="btn btn-primary"
                 formmethod="get" formaction="/employee/more/${selectedEmployee.id}/list">Commission list</button>

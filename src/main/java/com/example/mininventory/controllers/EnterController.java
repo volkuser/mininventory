@@ -37,7 +37,11 @@ public class EnterController {
     public String createUser(User user, Employee employee, Model model){
         if (!userService.createUser(user, employee)) model.addAttribute("errorMessage",
                 "user with this email already exists");
-        userService.createUser(user, employee);
-        return "redirect:/login";
+        try {
+            userService.createUser(user, employee);
+            return "/home";
+        } catch (Exception ignored) {
+            return "redirect:/login";
+        }
     }
 }

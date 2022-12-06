@@ -106,6 +106,7 @@
                             </select>
                         </label>
                     </div>
+                    <div><input type="hidden" name="_csrf" value="${_csrf.token}"></div>
                     <button type="submit" class="btn btn-primary">Add</button>
                 </form>
             </div>

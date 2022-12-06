@@ -43,6 +43,7 @@
                             </select>
                         </label>
                     </div>
+                    <div><input type="hidden" name="_csrf" value="${_csrf.token}"></div>
                     <a type="button" class="btn btn-primary" href="/employee/more/${actualId}">Back</a>
                     <button type="submit" formmethod="post" class="btn btn-primary">Create</button>
                 </form>
