@@ -22,6 +22,7 @@ public class User implements UserDetails {
     @Column(length = 1000)
     private String password;
 
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "employee_id")
     private Employee employee;

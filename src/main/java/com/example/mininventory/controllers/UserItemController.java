@@ -17,6 +17,7 @@ import java.util.Map;
 import java.util.stream.StreamSupport;
 
 @Controller
+@PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
 public class UserItemController {
     @Autowired
     private UserService userService;

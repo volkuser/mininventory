@@ -3,6 +3,7 @@ package com.example.mininventory.controllers;
 import com.example.mininventory.models.Location;
 import com.example.mininventory.services.LocationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -13,6 +14,7 @@ import java.sql.Time;
 import java.util.Map;
 
 @Controller
+@PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_USER')")
 public class LocationItemController {
     @Autowired
     private LocationService locationService;

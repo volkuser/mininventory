@@ -3,6 +3,7 @@ package com.example.mininventory.controllers;
 import com.example.mininventory.models.Commission;
 import com.example.mininventory.services.CommissionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,6 +18,7 @@ import java.util.Map;
 import java.util.stream.StreamSupport;
 
 @Controller
+@PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_ALSO_USER')")
 public class CommissionController {
     @Autowired
     private CommissionService commissionService;

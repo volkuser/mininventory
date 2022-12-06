@@ -20,6 +20,7 @@ import java.util.Map;
 import java.util.stream.StreamSupport;
 
 @Controller
+@PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
 public class UserController {
     @Autowired
     private UserService userService;
