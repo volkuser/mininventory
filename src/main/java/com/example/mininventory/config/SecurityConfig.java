@@ -50,8 +50,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .dataSource(dataSource)
                 .passwordEncoder(passwordEncoder())
                 .usersByUsernameQuery("SELECT email, password, active FROM user WHERE email=?")
-                .authoritiesByUsernameQuery("SELECT u.email, ur.roles FROM user u INNER JOIN user_role ur ON u.id = ur.user_id" +
-                        " WHERE u.email=?");
+                .authoritiesByUsernameQuery("SELECT u.email, ur.roles FROM user u " +
+                        "INNER JOIN user_role ur ON u.id = ur.user_id WHERE u.email=?");
     }
 
     @Bean
